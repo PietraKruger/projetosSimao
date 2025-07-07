@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Comidas</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #111111;
+      --panel-bg: #000000;
+      --panel-text: #ffffff;
+    }
+
+    body.dark {
+      --bg: #1c1c1c;
+      --text: #f0f0f0;
+      --panel-bg: #333;
+      --panel-text: #fff;
+    }
+
+    *,
+    *:before,
+    *:after {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Open Sans', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      transition: background-color 0.4s, color 0.4s;
+    }
+
+    header.navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background-color: #222;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 999;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    }
+
+    .navbar h1 {
+      margin: 0;
+      font-size: 1.2em;
+    }
+
+    .toggle-theme {
+      background: none;
+      border: 1px solid white;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .content {
+      margin-top: 80px;
+      padding: 20px;
+    }
+
+    .wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      grid-auto-rows: minmax(150px, auto);
+      gap: 10px;
+    }
+
+    .panel {
+      background-color: var(--panel-bg);
+      color: var(--panel-text);
+      border-radius: 5px;
+      padding: 20px;
+      font-size: 1.2em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      transition: transform 0.3s ease, background-color 0.4s;
+    }
+
+    .panel:hover {
+      transform: scale(1.05);
+    }
+
+    .section-title {
+      grid-column: 1 / -1;
+      background-color: #444;
+      color: white;
+      border-radius: 5px;
+      padding: 15px;
+      font-size: 1.5em;
+      text-align: center;
+    }
+
+    #bruschettas {
+      
+      background-image: url("imagens/bruschettas.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: #fff;
+      text-shadow: 1px 1px 3px #000;
+    }
+
+
+ #carpaccio {
+      background-image: url("imagens/carpaccio.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: #fff;
+      text-shadow: 1px 1px 3px #000;
+    }
+
+    
+
+    @media (max-width: 600px) {
+      .panel {
+        font-size: 1em;
+        padding: 15px;
+      }
+
+      .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+   
+  /* Adicione isso dentro do <style> */
+  .panel a {
+    display: block;
+    height: 100%;
+    width: 100%;
+    color: inherit;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+  }
+
+
+    }
+  </style>
+</head>
+<body>
+  <!--Criar e vincular LINK <a href="carpaccio.html">Recheio do Link</a>-->
+  <header class="navbar">
+    <h1>Cardápio de Comidas</h1>
+    <button class="toggle-theme" onclick="toggleTheme()">Modo Escuro</button>
+  </header>
+
+  <div class="content">
+    <div class="wrapper">
+      
+      <div class="section-title">Entradas</div>
+
+      <div class="panel" id="bruschettas"><a href="bruschettas.html">Bruschettas</a></div>
+      <div class="panel" id="carpaccio"><a href="carpaccio.html">Carpaccio</a></div>
+      <div class="panel">Espetinho Caprese ao Molho Pesto</div>
+      <div class="panel">Cestinha de massa de Pastel</div>
+      <div class="panel">Salada Italiana</div>
+      <div class="panel">Petisco de Maçã Caramelizada, Rúcula e Parma</div>
+      <div class="panel">Salada com Pasta de Azeitona Roxa</div>
+      <div class="panel">Caponata de Repolho Roxo</div>
+      <div class="panel">Tartare de Tomate com Carambola</div>
+      <div class="panel">Sopa de Inhame com Cardamomo</div>
+      <div class="panel">Batata Frita com Queijo e Bacon</div>
+      <div class="panel">Polenta Frita com Queijo Ralado</div>
+      <div class="panel">Salada de Folhas</div>
+      <div class="panel">Torradas e Molhos Diversos</div>
+      <div class="panel">Queijo Coalho com Melado de Cana</div>
+
+      <div class="section-title">Pratos Principais</div>
+      <div class="panel">Frango com Quiabo</div>
+      <div class="panel">Leitão à Pururuca</div>
+      <div class="panel">Galinhada com Pequi</div>
+      <div class="panel">Virado à Paulista</div>
+      <div class="panel">Picadinho de Carne</div>
+      <div class="panel">Feijoada</div>
+      <div class="panel">Arroz Carreteiro</div>
+      <div class="panel">Acarajé</div>
+      <div class="panel">Maniçoba</div>
+      <div class="panel">Bobó de Camarão</div>
+      <div class="panel">Tacacá</div>
+      <div class="panel">Baião de Dois</div>
+      <div class="panel">Arroz com Pequi</div>
+      <div class="panel">Moqueca</div>
+      <div class="panel">Coxinha</div>
+
+      <div class="section-title">Sobremesas</div>
+      <div class="panel">Doce de Leite</div>
+      <div class="panel">Beijinho</div>
+      <div class="panel">Mousse de Maracujá</div>
+      <div class="panel">Maria-Mole</div>
+      <div class="panel">Pé-de-Moleque</div>
+      <div class="panel">Açaí na Tigela</div>
+      <div class="panel">Canjica</div>
+      <div class="panel">Bolo de Rolo</div>
+      <div class="panel">Cajuzinho</div>
+      <div class="panel">Bombocado</div>
+      <div class="panel">Pastel de Belém</div>
+      <div class="panel">Sorvete de Creme Coagulado</div>
+      <div class="panel">Dondurma</div>
+      <div class="panel">Pastel de Nata</div>
+      <div class="panel">Tembleque</div>
+
+    </div>
+  </div>
+
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle('dark');
+    }
+  </script>
+</body>
+</html>
