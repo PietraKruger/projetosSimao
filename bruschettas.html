@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bruschetta</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #111111;
+      --card: #f2f2f2;
+    }
+
+    body.dark {
+      --bg: #1c1c1c;
+      --text: #f0f0f0;
+      --card: #2c2c2c;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+         background-image: url("imagens/bruschettas.jpg");
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Open Sans', sans-serif;
+      padding: 20px;
+      line-height: 1.6;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: var(--card);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      font-size: 1.8em;
+      margin-bottom: 10px;
+    }
+
+    b {
+      font-weight: bold;
+    }
+
+    p {
+      margin-bottom: 15px;
+    }
+
+    .back-button {
+      display:inline-block;
+      margin-top: 30px;
+      padding: 10px 20px;
+      background-color: #444;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      font-size: 1em;
+      transition: background-color 0.3s;
+    }
+
+    .back-button:hover {
+      background-color: #000;
+    }
+
+    .toggle-theme {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 6px 12px;
+      border: 1px solid #ccc;
+      background: none;
+      border-radius: 5px;
+      cursor: pointer;
+      color: var(--text);
+      z-index: 1000;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 15px;
+      }
+
+      h1 {
+        font-size: 1.5em;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <button class="toggle-theme" onclick="toggleTheme()">Modo Escuro</button>
+
+  <div class="container">
+<a href="index.html" class="back-button">← Voltar para o cardápio</a><br><br>
+
+
+    <h1>Bruschetta</h1>   
+   
+    <p><b>Tempo de preparo:</b> 20 minutos</p>
+    <p><b>Rendimento:</b> 6 porções (aproximadamente 12 unidades)</p>
+    <p><b>Dificuldade:</b> Fácil</p>
+
+    <h1>Ingredientes</h1>
+    <p>1 baguete ou pão italiano em fatias</p>
+    <p>3 tomates maduros sem sementes, picados em cubos pequenos</p>
+    <p>2 dentes de alho</p>
+    <p>1/4 de xícara (chá) de folhas de manjericão fresco</p>
+    <p>Azeite de oliva extravirgem a gosto</p>
+    <p>Sal e pimenta-do-reino a gosto</p>
+    <p>Queijo parmesão ralado ou mussarela de búfala (opcional)</p>
+
+    <h1>Modo de preparo</h1>
+    <p>Corte o pão em fatias diagonais de aproximadamente 1,5 cm de espessura.</p>
+    <p>Leve as fatias ao forno preaquecido a 180 °C por cerca de 5 a 7 minutos ou até ficarem levemente crocantes.</p>
+    <p>Esfregue um dente de alho cru sobre um lado de cada fatia de pão ainda quente, para perfumar.</p>
+    <p>Em uma tigela, misture os tomates picados, o manjericão, sal, pimenta e um fio generoso de azeite.</p>
+    <p>Coloque uma porção da mistura de tomate sobre cada fatia de pão.</p>
+    <p>Se desejar, finalize com queijo ralado ou pedaços de mussarela de búfala.</p>
+    <p>Retorne ao forno por mais 3 a 5 minutos, apenas para aquecer.</p>
+    <p>Sirva imediatamente, ainda morno.</p>
+
+    <h1>Dicas adicionais</h1>
+    <p>Para uma versão mais cremosa, adicione um fio de creme de balsâmico por cima na hora de servir.</p>
+    <p>Você pode substituir o tomate por cogumelos salteados, berinjela grelhada ou até abacate para versões diferentes.</p>
+
+    <a href="index.html" class="back-button">← Voltar para o cardápio</a>
+  </div>
+
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle('dark');
+    }
+  </script>
+</body>
+</html>
+

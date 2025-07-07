@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bruschetta</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #111111;
+      --card: #f2f2f2;
+    }
+
+    body.dark {
+      --bg: #1c1c1c;
+      --text: #f0f0f0;
+      --card: #2c2c2c;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+         background-image: url("imagens/carpaccio.jpg");
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Open Sans', sans-serif;
+      padding: 20px;
+      line-height: 1.6;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: var(--card);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      font-size: 1.8em;
+      margin-bottom: 10px;
+    }
+
+    b {
+      font-weight: bold;
+    }
+
+    p {
+      margin-bottom: 15px;
+    }
+
+    .back-button {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 10px 20px;
+      background-color: #444;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      font-size: 1em;
+      transition: background-color 0.3s;
+    }
+
+    .back-button:hover {
+      background-color: #000;
+    }
+
+    .toggle-theme {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 6px 12px;
+      border: 1px solid #ccc;
+      background: none;
+      border-radius: 5px;
+      cursor: pointer;
+      color: var(--text);
+      z-index: 1000;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 15px;
+      }
+
+      h1 {
+        font-size: 1.5em;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <button class="toggle-theme" onclick="toggleTheme()">Modo Escuro</button>
+
+  <div class="container">
+    <a href="index.html" class="back-button">← Voltar para o cardápio</a><br><br>
+
+
+    <h1>Carpaccio</h1>
+    <p><b>Tempo de preparo:</b> 30 minutos</p>
+    <p><b>Rendimento:</b> 2 pessoas</p>
+    <p><b>Dificuldade:</b> Fácil</p>
+
+    <h1>Ingredientes</h1>
+    <p>2 colheres de chá de folhas de salsinha picadas</p>
+    <p>2 colheres de chá de alcaparra picada</p>
+    <p>1 colher de chá de suco de limão</p>
+    <p>2 colheres de chá de mostarda</p>
+    <p>1 colher de chá de molho inglês</p>
+    <p>2 colheres de sopa de azeite de oliva</p>
+    <p>1 caixa de carpaccio</p>
+    <p>2 colheres de sopa cheias de queijo parmesão ralado na hora</p>
+    <p>Sal e pimenta-do-reino moída na hora a gosto</p>
+
+    <h1>Modo de preparo</h1>
+    <p>Misture todos os ingredientes em uma tigela com exceção do carpaccio.</p>
+    <p>Experimente, se faltar sal (pois a alcaparra é salgada) acrescente um pouco.</p>
+    <p>Disponha 8 fatias de carpaccio em cada prato e espalhe o molho sobre a carne e deixe descongelar.</p>
+    <p>Na hora de servir, moa pimenta por cima de cada prato e espalhe o parmesão.</p>
+
+    <h1>Dicas adicionais</h1>
+    <p>Escolha da carne: Use cortes magros e macios como filé mignon, patinho ou até mesmo atum fresco, se for uma versão com peixe.</p>
+    <p>Fatie com precisão: Para obter fatias bem finas, congele a carne por cerca de 30–40 minutos antes de fatiar. Isso facilita o corte fino.</p>
+    <p>Use faca bem afiada ou mandolina: Assim você consegue lâminas uniformes e delicadas.</p>
+
+    <a href="index.html" class="back-button">← Voltar para o cardápio</a>
+  </div>
+
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle('dark');
+    }
+  </script>
+</body>
+</html>
+
