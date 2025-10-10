@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+     <script>
+        /*6*/
+
+        let nota1 = Number (prompt("Digite a primeira nota:"))
+        let nota2 = Number (prompt("Digite a segunda nota:"))
+        let media = nota1+nota2/2
+
+        if(media >= 6){
+            console.log("Estudante aprovado!")
+        }
+
+        else{
+            console.log("Estudante reprovado!")
+        }
+
+        /*8*/
+
+        let velocidade = Number (prompt("digite a velocidade do veículo em km/h:"))
+
+        if (velocidade > 80){
+            console.log ("Seu carro foi multado!")
+        }
+
+        else {
+            console.log ("Veículo ok!")
+        }
+
+       /*9*/
+
+       let numeroDoUsuario = Number (prompt("Digite um número de 1 a 10:"))
+
+       if (numeroDoUsuario === 8){
+           console.log ("Parabéns! Voce acertou!")
+       }
+       else if (numeroDoUsuario === 7 & numeroDoUsuario === 9){
+        console.log ("Quase acertou!")
+       }
+
+       else {
+        console.log ("Errou!")
+       }
+
+      /*10*/
+
+      let valorPago = Number (prompt("Digite o valor de sua compra:"))
+
+      if (valorPago < 29.90){
+        console.log("Saldo insuficiente, tente novamente!")
+      }
+
+      else if (valorPago === 29.90){
+        console.log("Obrigado pela compra!")
+      }
+
+      else{
+        console.log("Obrigado pela compra, voce recebera r$ x de troco!")
+      }
+     </script>
+</body>
+</html>
