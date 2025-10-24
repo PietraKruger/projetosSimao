@@ -1,0 +1,2538 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sabores & Receitas</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: inherit;
+        }
+
+        :root {
+            --primary-color: #1a1a2e;
+            --secondary-color: #16213e;
+            --accent-color: #e94560;
+            --gold-accent: #f39c12;
+            --bg-color: #0f0f23;
+            --card-bg: #1e1e3f;
+            --text-primary: #ffffff;
+            --text-secondary: #b8b8d1;
+            --border-color: #2a2a4a;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --gradient-primary: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            --gradient-accent: linear-gradient(135deg, #e94560 0%, #f39c12 100%);
+        }
+
+        [data-theme="light"] {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #e74c3c;
+            --gold-accent: #f39c12;
+            --bg-color: #ecf0f1;
+            --card-bg: #ffffff;
+            --text-primary: #2c3e50;
+            --text-secondary: #7f8c8d;
+            --border-color: #bdc3c7;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --gradient-primary: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            --gradient-accent: linear-gradient(135deg, #e74c3c 0%, #f39c12 100%);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: var(--card-bg);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            transition: all 0.3s ease;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 0;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .theme-toggle {
+            background: var(--gradient-accent);
+            color: white;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(233, 69, 96, 0.3);
+        }
+
+        .theme-toggle:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(233, 69, 96, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--gradient-primary);
+            color: white;
+            text-align: center;
+            padding: 6rem 0;
+            position: relative;
+            overflow: hidden;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 80%, rgba(233, 69, 96, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(243, 156, 18, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(233, 69, 96, 0.2) 0%, transparent 50%);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1.5" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
+            opacity: 0.4;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            33% {
+                transform: translateY(-20px) rotate(1deg);
+            }
+
+            66% {
+                transform: translateY(-10px) rotate(-1deg);
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: slideDown 1s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            line-height: 1.1;
+            animation: slideUp 1s ease-out 0.2s both;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-highlight {
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 3rem;
+            opacity: 0.95;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+            animation: slideUp 1s ease-out 0.4s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: slideUp 1s ease-out 0.6s both;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 4rem;
+            animation: slideUp 1s ease-out 0.8s both;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 0.5rem;
+        }
+
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .floating-icon {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.1;
+            animation: floatIcon 8s ease-in-out infinite;
+        }
+
+        .floating-icon:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-icon:nth-child(2) {
+            top: 60%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+
+        .floating-icon:nth-child(3) {
+            bottom: 30%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        .floating-icon:nth-child(4) {
+            top: 40%;
+            right: 25%;
+            animation-delay: 6s;
+        }
+
+        .floating-icon:nth-child(5) {
+            bottom: 20%;
+            right: 10%;
+            animation-delay: 1s;
+        }
+
+        .floating-icon:nth-child(6) {
+            top: 70%;
+            left: 30%;
+            animation-delay: 3s;
+        }
+
+        @keyframes floatIcon {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+                opacity: 0.1;
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(5deg);
+                opacity: 0.2;
+            }
+        }
+
+        .img-pratos {
+            border-top-left-radius: 15px 15px;
+            border-top-right-radius: 15px 15px;
+        }
+
+        .cta-button {
+            background: var(--gradient-accent);
+            color: white;
+            padding: 1.2rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 6px 20px rgba(233, 69, 96, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 35px rgba(233, 69, 96, 0.4);
+        }
+
+        .cta-button-secondary {
+            background: transparent;
+            color: white;
+            padding: 1.2rem 2.5rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            backdrop-filter: blur(10px);
+        }
+
+        .cta-button-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-4px);
+        }
+
+        /* Sections */
+        .section {
+            padding: 5rem 0;
+            position: relative;
+        }
+
+        .section:nth-child(even) {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 4rem;
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--gradient-accent);
+            border-radius: 2px;
+        }
+
+        .recipe-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .recipe-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .recipe-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-accent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+
+        .recipe-card:hover::before {
+            opacity: 0.05;
+        }
+
+        .recipe-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+            border-color: var(--accent-color);
+        }
+
+        .recipe-image {
+            width: 100%;
+            height: 220px;
+            background: var(--gradient-accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .recipe-content {
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .recipe-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: var(--text-primary);
+        }
+
+        .recipe-description {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .recipe-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        .difficulty {
+            background: var(--gradient-accent);
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(233, 69, 96, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--gradient-primary);
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 5rem;
+            border-top: 2px solid var(--border-color);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1.5rem;
+            }
+
+            .hero {
+                min-height: 70vh;
+                padding: 4rem 0;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .hero-stats {
+                gap: 2rem;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+
+            .recipe-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .logo {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .hero {
+                padding: 3rem 0;
+                min-height: 60vh;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .cta-button,
+            .cta-button-secondary {
+                padding: 1rem 2rem;
+                font-size: 1rem;
+            }
+
+            .floating-icon {
+                display: none;
+            }
+
+            .section {
+                padding: 3rem 0;
+            }
+        }
+
+        /* Recipe Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            max-width: 700px;
+            margin: 2rem auto;
+            border-radius: 20px;
+            padding: 2.5rem;
+            position: relative;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            background: var(--gold-accent);
+            transform: rotate(90deg);
+        }
+
+        .modal h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .ingredients,
+        .instructions {
+            margin-bottom: 2.5rem;
+        }
+
+        .ingredients h4,
+        .instructions h4 {
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .ingredients ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .ingredients li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .ingredients li::before {
+            content: '•';
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+        }
+
+        .instructions ol {
+            padding-left: 2rem;
+        }
+
+        .instructions li {
+            margin-bottom: 1.2rem;
+            line-height: 1.7;
+            padding: 0.5rem 0;
+        }
+
+        /* Scrollbar customization */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gradient-accent);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-color);
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">Sabores & Receitas</div>
+            <ul class="nav-links">
+                <li><a href="#entradas">Entradas</a></li>
+                <li><a href="#principais">Pratos Principais</a></li>
+                <li><a href="#sobremesas">Sobremesas</a></li>
+                <li><button class="theme-toggle" onclick="toggleTheme()">☀️ Modo Claro</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="floating-elements">
+            <div class="floating-icon">🍅</div>
+            <div class="floating-icon">🥗</div>
+            <div class="floating-icon">🍕</div>
+            <div class="floating-icon">🍝</div>
+            <div class="floating-icon">🍔</div>
+            <div class="floating-icon">🍰</div>
+            <div class="floating-icon">🐟</div>
+            <div class="floating-icon">🍲</div>
+            <div class="floating-icon">🥐</div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">✨ Mais de 100 receitas exclusivas</div>
+                <h1>Descubra <span class="hero-highlight">Sabores</span> Incríveis</h1>
+                <p>Aprenda receitas deliciosas com instruções simples e ingredientes acessíveis. Uma jornada culinária
+                    que desperta todos os sentidos e transforma sua cozinha em um verdadeiro laboratório de sabores.</p>
+                <div class="hero-buttons">
+                    <a href="#entradas" class="cta-button">Explorar Receitas</a>
+                    <a href="#principais" class="cta-button-secondary">Ver Pratos Principais</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">100+</span>
+                        <div class="stat-label">Receitas Exclusivas</div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">15min</span>
+                        <div class="stat-label">Tempo Médio</div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">100%</span>
+                        <div class="stat-label">Testadas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="entradas" class="section">
+        <div class="container">
+            <h2 class="section-title">Entradas</h2>
+            <div class="recipe-grid">
+                <div class="recipe-card" onclick="openRecipe('bruschetta')">
+                    <div class="recipe-image"><img src="T103 PIETRA K_PEDRO A/sabores-e-receitas/imagens/1.png" class="img-pratos"></div>
+                    <div class="recipe-content">
+                        <h3 class="recipe-title">Bruschetta Italiana</h3>
+                        <p class="recipe-description">Fatias de pão tostado com tomate fresco, manjericão e azeite extra
+                            virgem. Uma explosão de sabores mediterrâneos.</p>
+                        <div class="recipe-meta">
+                            <span>⏱️ 15 min</span>
+                            <span class="difficulty">Fácil</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recipe-card" onclick="openRecipe('salada')">
+                    <div class="recipe-image"><img src="T103 PIETRA K_PEDRO A/sabores-e-receitas/imagens/2.png" class="img-pratos"></div>
+                    <div class="recipe-content">
+                        <h3 class="recipe-title">Salada Caprese</h3>
+                        <p class="recipe-description">Mozzarella fresca, tomate e manjericão com azeite especial.
+                            Simplicidade e elegância em cada garfada.</p>
+                        <div class="recipe-meta">
+                            <span>⏱️ 10 min</span>
+                            <span class="difficulty">Fácil</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recipe-card" onclick="openRecipe('sopa')">
+                    <div class="recipe-image"><img src="T103 PIETRA K_PEDRO A/sabores-e-receitas/imagens/3.png" class="img-pratos"></div>
+                    <div class="recipe-content">
+                        <h3 class="recipe-title">Sopa de Abóbora</h3>
+                        <p class="recipe-description">Cremosa sopa de abóbora com gengibre e leite de coco. Conforto e
+                            nutrição em uma tigela.</p>
+                        <div class="recipe-meta">
+                            <span>⏱️ 30 min</span>
+                            <span class="difficulty">Médio</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recipe-card" onclick="openRecipe('coxinha')">
+                    <div class="recipe-image"><img src="T103 PIETRA K_PEDRO A/sabores-e-receitas/imagens/4.png" class="img-pratos"></div>
+                    <div class="recipe-content">
+                        <h3 class="recipe-title">Coxinha de Frango</h3>
+                        <p class="recipe-description">Clássico brasileiro com massa cremosa e recheio de frango
+                            desfiado. Crocante por fora, macia por dentro.</p>
+                        <div class="recipe-meta">
+                            <span>⏱️ 1h 15min</span>
+                            <span class="difficulty">Médio</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recipe-card" onclick="openRecipe('guacamole')">
+                    <div class="recipe-image"><img src="T103 PIETRA K_PEDRO A/sabores-e-receitas/imagens/5.png" class="img-pratos"></div>
+                    <div class="recipe-content">
+                        <h3 class="recipe-title">Guacamole Mexicano</h3>
+                        <p class="recipe-description">Cremoso abacate temperado com limão, coentro e pimenta. Perfeito
+                            com nachos ou tacos.</p>
+                        <div class="recipe-meta">
+                            <span>⏱️ 10 min</span>
+                            <span class="difficulty">Fácil</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recipe-card" onclick="openRecipe('hummus')">
+                    <div class="recipe-image"><img src="T103 PIETRA K_PEDRO A/sabores-e-receitas/imagens/6.png" class="img-pratos"></div>
+                    <div class="recipe-content">
+                        <h3 class="recipe-title">Hummus Tradicional</h3>
+                        <p class="recipe-description">Pasta cremosa de grão-de-bico com tahine e especiarias. Saudável e
+                            repleto de sabor mediterrâneo.</p>
+                        <div class="recipe-meta">
+                            <span>⏱️ 15 min</span>
+                            <span class="difficulty">Fácil</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recipe-card" onclick="openRecipe('tartare')">
+                    <div class="recipe-image"><img src="T103 PIETRA K_PEDRO A/sabores-e-receitas/imagens/7.png" class="img-pratos"></div>
+                    <div class="recipe-content">
+                        <h3 class="recipe-title">Tartare de Salmão</h3>
+                        <p class="recipe-description">Salmão fresco em cubos com alcaparras e mostarda. Sofisticação
+                            francesa em cada garfada.</p>
+                        <div class="recipe-meta">
+                            <span>⏱️ 20 min</span>
+                            <span class="difficulty">Médio</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recipe-card" onclick="openRecipe('carpaccio')">
+                    <div class="recipe-image"><img src="T103 PIETRA K_PEDRO A/sabores-e-receitas/imagens/8.png" class="img-pratos"></div>
+                    <div class="recipe-content">
+                        <h3 class="recipe-title">Carpaccio de Carne</h3>
+                        <p class="recipe-description">Fatias finas de carne crua com rúcula e parmesão. Elegância
+                            italiana no seu prato.</p>
+                        <div class="recipe-meta">
+                            <span>⏱️ 15 min</span>
+                            <span class="difficulty">Fácil</span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="recipe-card" onclick="openRecipe('antipasto')">
+                    <div class="recipe-image"><img src="T103 PIETRA K_PEDRO A/sabores-e-receitas/imagens/9.png" class="img-pratos"></div>
+                    <div class="recipe-content">
+                        <h3 class="recipe-title">Tábua de Antipasto</h3>
+                        <p class="recipe-description">Seleção de queijos, embutidos e conservas. Perfeita para
+                            compartilhar momentos especiais.</p>
+                        <div class="recipe-meta">
+                            <span>⏱️ 25 min</span>
+                            <span class="difficulty">Fácil</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recipe-card" onclick="openRecipe('gazpacho')">
+                    <div class="recipe-image"><img src="T103 PIETRA K_PEDRO A/sabores-e-receitas/imagens/10.png" class="img-pratos"></div>
+                    <div class="recipe-content">
+                        <h3 class="recipe-title">Gazpacho Andaluz</h3>
+                        <p class="recipe-description">Sopa fria espanhola de tomate e vegetais. Refrescante e nutritiva
+                            para dias quentes.</p>
+                        <div class="recipe-meta">
+                            <span>⏱️ 30 min</span>
+                            <span class="difficulty">Fácil</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recipe-card" onclick="openRecipe('tempura')">
+                    <div class="recipe-image"><img src="T103 PIETRA K_PEDRO A/sabores-e-receitas/imagens/11.png" class="img-pratos"></div>
+                    <div class="recipe-content">
+                        <h3 class="recipe-title">Tempurá de Camarão</h3>
+                        <p class="recipe-description">Camarões empanados na massa japonesa crocante. Leveza e sabor em
+                            harmonia oriental.</p>
+                        <div class="recipe-meta">
+                            <span>⏱️ 30 min</span>
+                            <span class="difficulty">Médio</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="principais" class="section">
+        <div class="container">
+            <h2 class="section-title">Pratos Principais</h2>
+            <div class="recipe-grid">
+                <div class="recipe-card" onclick="openRecipe('risotto')">
+                    <div class="recipe-image"><img src="T103 PIETRA K_PEDRO A/sabores-e-receitas/imagens/12.png" class="img-pratos"></div>
+                    <div class="recipe-content">
+                        <h3 class="recipe-title">Risotto de Cogumelos</h3>
+                        <p class="recipe-description">Arroz arbóreo cremoso com mix de cogumelos frescos. Uma
+                            experiência gastronômica sofisticada.</p>
+                        <div class="recipe-meta">
+                            <span>⏱️ 45 min</span>
+                            <span class="difficulty">Médio</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recipe-card" onclick="openRecipe('salmao')">
+                    <div class="recipe-image"><img src="T103 PIETRA K_PEDRO A/sabores-e-receitas/imagens/13.png" class="img-pratos"></div>
+                    <div class="recipe-content">
+                        <h3 class="recipe-title">Salmão Grelhado</h3>
+                        <p class="recipe-description">Filé de salmão com crosta de ervas e legumes assados. Sabor
+                            oceânico com toque aromático.</p>
+                        <div class="recipe-meta">
+                            <span>⏱️ 25 min</span>
+                            <span class="difficulty">Fácil</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recipe-card" onclick="openRecipe('pasta')">
+                    <div class="recipe-image"><img src="T103 PIETRA K_PEDRO A/sabores-e-receitas/imagens/14.png" class="img-pratos"></div>
+                    <div class="recipe-content">
+                        <h3 class="recipe-title">Pasta Carbonara</h3>
+                        <p class="recipe-description">Massa italiana clássica com bacon, ovos e queijo parmesão.
+                            Tradição romana autêntica.</p>
+                        <div class="recipe-meta">
+                            <span>⏱️ 20 min</span>
+                            <span class="difficulty">Médio</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recipe-card" onclick="openRecipe('frango')">
+                    <div class="recipe-image"><img src="T103 PIETRA K_PEDRO A/sabores-e-receitas/imagens/15.png" class="img-pratos"></div>
+                    <div class="recipe-content">
+                        <h3 class="recipe-title">Frango à Parmegiana</h3>
+                        <p class="recipe-description">Filé empanado coberto com molho de tomate e queijo derretido.
+                            Clássico que nunca sai de moda.</p>
+                        <div class="recipe-meta">
+                            <span>⏱️ 40 min</span>
+                            <span class="difficulty">Médio</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recipe-card" onclick="openRecipe('paella')">
+                    <div class="recipe-image"><img src="T103 PIETRA K_PEDRO A/sabores-e-receitas/imagens/16.png" class="img-pratos"></div>
+                    <div class="recipe-content">
+                        <h3 class="recipe-title">Paella Valenciana</h3>
+                        <p class="recipe-description">Arroz espanhol com frutos do mar, frango e açafrão. Uma festa de
+                            sabores em uma panela.</p>
+                        <div class="recipe-meta">
+                            <span>⏱️ 50 min</span>
+                            <span class="difficulty">Difícil</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recipe-card" onclick="openRecipe('lasanha')">
+                    <div class="recipe-image"><img src="T103 PIETRA K_PEDRO A/sabores-e-receitas/imagens/17.png" class="img-pratos"></div>
+                    <div class="recipe-content">
+                        <h3 class="recipe-title">Lasanha Bolonhesa</h3>
+                        <p class="recipe-description">Camadas de massa, molho bolonhesa e queijo. Conforto italiano em
+                            cada garfada.</p>
+                        <div class="recipe-meta">
+                            <span>⏱️ 1h 30min</span>
+                            <span class="difficulty">Médio</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recipe-card" onclick="openRecipe('curry')">
+                    <div class="recipe-image"><img src="T103 PIETRA K_PEDRO A/sabores-e-receitas/imagens/18.png" class="img-pratos"></div>
+                    <div class="recipe-content">
+                        <h3 class="recipe-title">Curry de Camarão</h3>
+                        <p class="recipe-description">Camarões em molho cremoso de curry e leite de coco. Explosão de
+                            sabores orientais.</p>
+                        <div class="recipe-meta">
+                            <span>⏱️ 35 min</span>
+                            <span class="difficulty">Médio</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recipe-card" onclick="openRecipe('wellington')">
+                    <div class="recipe-image"><img src="T103 PIETRA K_PEDRO A/sabores-e-receitas/imagens/19.png" class="img-pratos"></div>
+                    <div class="recipe-content">
+                        <h3 class="recipe-title">Beef Wellington</h3>
+                        <p class="recipe-description">Filé mignon envolvido em massa folhada com cogumelos. O ápice da
+                            culinária britânica.</p>
+                        <div class="recipe-meta">
+                            <span>⏱️ 2h</span>
+                            <span class="difficulty">Difícil</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recipe-card" onclick="openRecipe('ratatouille')">
+                    <div class="recipe-image"><img src="T103 PIETRA K_PEDRO A/sabores-e-receitas/imagens/20.png" class="img-pratos"></div>
+                    <div class="recipe-content">
+                        <h3 class="recipe-title">Ratatouille Provençal</h3>
+                        <p class="recipe-description">Refogado francês de vegetais mediterrâneos. Cores e sabores da
+                            Provença em harmonia.</p>
+                        <div class="recipe-meta">
+                            <span>⏱️ 45 min</span>
+                            <span class="difficulty">Médio</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recipe-card" onclick="openRecipe('coqauvin')">
+                    <div class="recipe-image"><img src="T103 PIETRA K_PEDRO A/sabores-e-receitas/imagens/21.png" class="img-pratos"></div>
+                    <div class="recipe-content">
+                        <h3 class="recipe-title">Coq au Vin</h3>
+                        <p class="recipe-description">Frango cozido em vinho tinto com cogumelos e bacon. Clássico
+                            francês reconfortante.</p>
+                        <div class="recipe-meta">
+                            <span>⏱️ 1h 30min</span>
+                            <span class="difficulty">Médio</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recipe-card" onclick="openRecipe('ossobuco')">
+                    <div class="recipe-image"><img src="T103 PIETRA K_PEDRO A/sabores-e-receitas/imagens/22.png" class="img-pratos"></div>
+                    <div class="recipe-content">
+                        <h3 class="recipe-title">Osso Buco Milanês</h3>
+                        <p class="recipe-description">Jarrete bovino cozido lentamente com vegetais. Tradição italiana
+                            que derrete na boca.</p>
+                        <div class="recipe-meta">
+                            <span>⏱️ 2h 30min</span>
+                            <span class="difficulty">Médio</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recipe-card" onclick="openRecipe('bouillabaisse')">
+                    <div class="recipe-image"><img src="T103 PIETRA K_PEDRO A/sabores-e-receitas/imagens/23.png" class="img-pratos"></div>
+                    <div class="recipe-content">
+                        <h3 class="recipe-title">Bouillabaisse</h3>
+                        <p class="recipe-description">Sopa provençal de frutos do mar com açafrão. Sabores do
+                            Mediterrâneo em cada colherada.</p>
+                        <div class="recipe-meta">
+                            <span>⏱️ 1h 15min</span>
+                            <span class="difficulty">Difícil</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recipe-card" onclick="openRecipe('moqueca')">
+                    <div class="recipe-image"><img src="T103 PIETRA K_PEDRO A/sabores-e-receitas/imagens/24.png" class="img-pratos"></div>
+                    <div class="recipe-content">
+                        <h3 class="recipe-title">Moqueca Baiana</h3>
+                        <p class="recipe-description">Peixe em leite de coco com dendê e pimentões. Sabor tropical
+                            brasileiro autêntico.</p>
+                        <div class="recipe-meta">
+                            <span>⏱️ 40 min</span>
+                            <span class="difficulty">Médio</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recipe-card" onclick="openRecipe('feijoada')">
+                    <div class="recipe-image"><img src="T103 PIETRA K_PEDRO A/sabores-e-receitas/imagens/25.png" class="img-pratos"></div>
+                    <div class="recipe-content">
+                        <h3 class="recipe-title">Feijoada Completa</h3>
+                        <p class="recipe-description">Prato nacional brasileiro com feijão preto e carnes. Tradição que
+                            une família e amigos.</p>
+                        <div class="recipe-meta">
+                            <span>⏱️ 3h</span>
+                            <span class="difficulty">Médio</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recipe-card" onclick="openRecipe('padhaithai')">
+                    <div class="recipe-image"><img src="T103 PIETRA K_PEDRO A/sabores-e-receitas/imagens/26.png" class="img-pratos"></div>
+                    <div class="recipe-content">
+                        <h3 class="recipe-title">Pad Thai</h3>
+                        <p class="recipe-description">Macarrão de arroz tailandês com camarão e amendoim. Equilíbrio
+                            perfeito de sabores asiáticos.</p>
+                        <div class="recipe-meta">
+                            <span>⏱️ 25 min</span>
+                            <span class="difficulty">Médio</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recipe-card" onclick="openRecipe('tagine')">
+                    <div class="recipe-image"><img src="T103 PIETRA K_PEDRO A/sabores-e-receitas/imagens/27.png" class="img-pratos"></div>
+                    <div class="recipe-content">
+                        <h3 class="recipe-title">Tagine Marroquino</h3>
+                        <p class="recipe-description">Cordeiro com damascos e especiarias exóticas. Viagem sensorial
+                            pelo Norte da África.</p>
+                        <div class="recipe-meta">
+                            <span>⏱️ 2h</span>
+                            <span class="difficulty">Médio</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="sobremesas" class="section">
+        <div class="container">
+            <h2 class="section-title">Sobremesas</h2>
+            <div class="recipe-grid">
+                <div class="recipe-card" onclick="openRecipe('tiramisu')">
+                    <div class="recipe-image"><img src="T103 PIETRA K_PEDRO A/sabores-e-receitas/imagens/28.png" class="img-pratos"></div>
+                    <div class="recipe-content">
+                        <h3 class="recipe-title">Tiramisù Clássico</h3>
+                        <p class="recipe-description">Sobremesa italiana com café, mascarpone e cacau. O final perfeito
+                            para qualquer refeição especial.</p>
+                        <div class="recipe-meta">
+                            <span>⏱️ 4h (geladeira)</span>
+                            <span class="difficulty">Médio</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recipe-card" onclick="openRecipe('mousse')">
+                    <div class="recipe-image"><img src="T103 PIETRA K_PEDRO A/sabores-e-receitas/imagens/29.png" class="img-pratos"></div>
+                    <div class="recipe-content">
+                        <h3 class="recipe-title">Mousse de Chocolate</h3>
+                        <p class="recipe-description">Mousse aerado de chocolate belga com chantilly. Indulgência pura
+                            em cada colherada.</p>
+                        <div class="recipe-meta">
+                            <span>⏱️ 2h (geladeira)</span>
+                            <span class="difficulty">Fácil</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recipe-card" onclick="openRecipe('pavlova')">
+                    <div class="recipe-image"><img src="T103 PIETRA K_PEDRO A/sabores-e-receitas/imagens/30.png" class="img-pratos"></div>
+                    <div class="recipe-content">
+                        <h3 class="recipe-title">Pavlova de Frutas</h3>
+                        <p class="recipe-description">Merengue crocante com chantilly e frutas vermelhas. Leveza e sabor
+                            em harmonia perfeita.</p>
+                        <div class="recipe-meta">
+                            <span>⏱️ 1h 30min</span>
+                            <span class="difficulty">Difícil</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recipe-card" onclick="openRecipe('brigadeiro')">
+                    <div class="recipe-image"><img src="T103 PIETRA K_PEDRO A/sabores-e-receitas/imagens/31.png" class="img-pratos"></div>
+                    <div class="recipe-content">
+                        <h3 class="recipe-title">Brigadeiro Gourmet</h3>
+                        <p class="recipe-description">Doce brasileiro cremoso com chocolate nobre e granulado especial.
+                            Pura nostalgia em cada bolinha.</p>
+                        <div class="recipe-meta">
+                            <span>⏱️ 25 min</span>
+                            <span class="difficulty">Fácil</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recipe-card" onclick="openRecipe('cheesecake')">
+                    <div class="recipe-image"><img src="T103 PIETRA K_PEDRO A/sabores-e-receitas/imagens/32.png" class="img-pratos"></div>
+                    <div class="recipe-content">
+                        <h3 class="recipe-title">Cheesecake de Frutas Vermelhas</h3>
+                        <p class="recipe-description">Torta cremosa de cream cheese com calda de frutas vermelhas.
+                            Elegância em cada fatia.</p>
+                        <div class="recipe-meta">
+                            <span>⏱️ 4h (geladeira)</span>
+                            <span class="difficulty">Médio</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recipe-card" onclick="openRecipe('pudim')">
+                    <div class="recipe-image"><img src="T103 PIETRA K_PEDRO A/sabores-e-receitas/imagens/33.png" class="img-pratos"></div>
+                    <div class="recipe-content">
+                        <h3 class="recipe-title">Pudim de Leite Condensado</h3>
+                        <p class="recipe-description">Clássico brasileiro cremoso com calda de caramelo. Sobremesa que
+                            conquista gerações.</p>
+                        <div class="recipe-meta">
+                            <span>⏱️ 1h 20min</span>
+                            <span class="difficulty">Médio</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recipe-card" onclick="openRecipe('brownie')">
+                    <div class="recipe-image"><img src="T103 PIETRA K_PEDRO A/sabores-e-receitas/imagens/34.png" class="img-pratos"></div>
+                    <div class="recipe-content">
+                        <h3 class="recipe-title">Brownie de Chocolate</h3>
+                        <p class="recipe-description">Bolo úmido e intenso de chocolate com pedaços de nozes.
+                            Irresistível para chocólatras.</p>
+                        <div class="recipe-meta">
+                            <span>⏱️ 45 min</span>
+                            <span class="difficulty">Fácil</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recipe-card" onclick="openRecipe('pannacotta')">
+                    <div class="recipe-image"><img src="T103 PIETRA K_PEDRO A/sabores-e-receitas/imagens/35.png" class="img-pratos"></div>
+                    <div class="recipe-content">
+                        <h3 class="recipe-title">Panna Cotta de Baunilha</h3>
+                        <p class="recipe-description">Sobremesa italiana sedosa com calda de frutas. Simplicidade e
+                            sofisticação em harmonia.</p>
+                        <div class="recipe-meta">
+                            <span>⏱️ 3h (geladeira)</span>
+                            <span class="difficulty">Médio</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recipe-card" onclick="openRecipe('cremeBrulee')">
+                    <div class="recipe-image"><img src="T103 PIETRA K_PEDRO A/sabores-e-receitas/imagens/36.png" class="img-pratos"></div>
+                    <div class="recipe-content">
+                        <h3 class="recipe-title">Crème Brûlée</h3>
+                        <p class="recipe-description">Creme francês com açúcar caramelizado. Textura sedosa com crosta
+                            crocante irresistível.</p>
+                        <div class="recipe-meta">
+                            <span>⏱️ 4h (geladeira)</span>
+                            <span class="difficulty">Difícil</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recipe-card" onclick="openRecipe('macarons')">
+                    <div class="recipe-image"><img src="T103 PIETRA K_PEDRO A/sabores-e-receitas/imagens/37.png" class="img-pratos"></div>
+                    <div class="recipe-content">
+                        <h3 class="recipe-title">Macarons Franceses</h3>
+                        <p class="recipe-description">Delicados biscoitos coloridos com recheio cremoso. Arte comestível
+                            da confeitaria francesa.</p>
+                        <div class="recipe-meta">
+                            <span>⏱️ 2h</span>
+                            <span class="difficulty">Difícil</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recipe-card" onclick="openRecipe('banoffee')">
+                    <div class="recipe-image"><img src="T103 PIETRA K_PEDRO A/sabores-e-receitas/imagens/38.png" class="img-pratos"></div>
+                    <div class="recipe-content">
+                        <h3 class="recipe-title">Banoffee Pie</h3>
+                        <p class="recipe-description">Torta inglesa com banana, doce de leite e chantilly. Combinação
+                            perfeita de texturas e sabores.</p>
+                        <div class="recipe-meta">
+                            <span>⏱️ 3h (geladeira)</span>
+                            <span class="difficulty">Médio</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recipe-card" onclick="openRecipe('profiteroles')">
+                    <div class="recipe-image"><img src="T103 PIETRA K_PEDRO A/sabores-e-receitas/imagens/39.png" class="img-pratos"></div>
+                    <div class="recipe-content">
+                        <h3 class="recipe-title">Profiteroles</h3>
+                        <p class="recipe-description">Massa choux recheada com creme e cobertura de chocolate. Elegância
+                            francesa em cada mordida.</p>
+                        <div class="recipe-meta">
+                            <span>⏱️ 1h 30min</span>
+                            <span class="difficulty">Difícil</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recipe-card" onclick="openRecipe('millefeuille')">
+                    <div class="recipe-image"><img src="T103 PIETRA K_PEDRO A/sabores-e-receitas/imagens/40.png" class="img-pratos"></div>
+                    <div class="recipe-content">
+                        <h3 class="recipe-title">Millefeuille</h3>
+                        <p class="recipe-description">Folhado francês com creme de confeiteiro. Camadas crocantes que se
+                            desfazem na boca.</p>
+                        <div class="recipe-meta">
+                            <span>⏱️ 2h 30min</span>
+                            <span class="difficulty">Difícil</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recipe-card" onclick="openRecipe('beijinho')">
+                    <div class="recipe-image"><img src="T103 PIETRA K_PEDRO A/sabores-e-receitas/imagens/41.png" class="img-pratos"></div>
+                    <div class="recipe-content">
+                        <h3 class="recipe-title">Beijinho de Coco</h3>
+                        <p class="recipe-description">Doce brasileiro cremoso com coco ralado. Tradição que adoça
+                            qualquer festa ou momento.</p>
+                        <div class="recipe-meta">
+                            <span>⏱️ 30 min</span>
+                            <span class="difficulty">Fácil</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recipe-card" onclick="openRecipe('quindim')">
+                    <div class="recipe-image"><img src="T103 PIETRA K_PEDRO A/sabores-e-receitas/imagens/42.png" class="img-pratos"></div>
+                    <div class="recipe-content">
+                        <h3 class="recipe-title">Quindim</h3>
+                        <p class="recipe-description">Doce brasileiro de coco e gemas. Textura única que derrete
+                            suavemente no paladar.</p>
+                        <div class="recipe-meta">
+                            <span>⏱️ 1h 15min</span>
+                            <span class="difficulty">Médio</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recipe-card" onclick="openRecipe('baklava')">
+                    <div class="recipe-image"><img src="T103 PIETRA K_PEDRO A/sabores-e-receitas/imagens/43.png" class="img-pratos"></div>
+                    <div class="recipe-content">
+                        <h3 class="recipe-title">Baklava</h3>
+                        <p class="recipe-description">Doce árabe com massa filo, nozes e mel. Camadas crocantes com
+                            sabor do Oriente Médio.</p>
+                        <div class="recipe-meta">
+                            <span>⏱️ 1h 45min</span>
+                            <span class="difficulty">Médio</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recipe-card" onclick="openRecipe('mochi')">
+                    <div class="recipe-image"><img src="T103 PIETRA K_PEDRO A/sabores-e-receitas/imagens/44.png" class="img-pratos"></div>
+                    <div class="recipe-content">
+                        <h3 class="recipe-title">Mochi de Sorvete</h3>
+                        <p class="recipe-description">Doce japonês com massa de arroz e sorvete. Textura única que
+                            surpreende a cada mordida.</p>
+                        <div class="recipe-meta">
+                            <span>⏱️ 2h (congelador)</span>
+                            <span class="difficulty">Médio</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recipe-card" onclick="openRecipe('cannoli')">
+                    <div class="recipe-image"><img src="T103 PIETRA K_PEDRO A/sabores-e-receitas/imagens/45.png" class="img-pratos"></div>
+                    <div class="recipe-content">
+                        <h3 class="recipe-title">Cannoli Siciliano</h3>
+                        <p class="recipe-description">Casquinha crocante recheada com ricota doce. Tradição siciliana
+                            que conquista paladares.</p>
+                        <div class="recipe-meta">
+                            <span>⏱️ 1h 30min</span>
+                            <span class="difficulty">Médio</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recipe-card" onclick="openRecipe('gelato')">
+                    <div class="recipe-image"><img src="T103 PIETRA K_PEDRO A/sabores-e-receitas/imagens/46.png" class="img-pratos"></div>
+                    <div class="recipe-content">
+                        <h3 class="recipe-title">Gelato Artesanal</h3>
+                        <p class="recipe-description">Sorvete italiano cremoso de pistache. Textura densa e sabor
+                            intenso que refresca a alma.</p>
+                        <div class="recipe-meta">
+                            <span>⏱️ 4h (sorveteira)</span>
+                            <span class="difficulty">Médio</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Sabores & Receitas. Feito com ❤️ para amantes da culinária.</p>
+        </div>
+    </footer>
+
+    <!-- Modal para receitas -->
+    <div id="recipeModal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeRecipe()">&times;</button>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle tema claro/escuro
+        function toggleTheme() {
+            const body = document.body;
+            const button = document.querySelector('.theme-toggle');
+
+            if (body.getAttribute('data-theme') === 'light') {
+                body.removeAttribute('data-theme');
+                button.innerHTML = '☀️ Modo Claro';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                body.setAttribute('data-theme', 'light');
+                button.innerHTML = '🌙 Modo Escuro';
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // Carregar tema salvo
+        document.addEventListener('DOMContentLoaded', function () {
+            const savedTheme = localStorage.getItem('theme');
+            const button = document.querySelector('.theme-toggle');
+
+            if (savedTheme === 'light') {
+                document.body.setAttribute('data-theme', 'light');
+                button.innerHTML = '🌙 Modo Escuro';
+            }
+        });
+
+        // Receitas detalhadas
+        const recipes = {
+            bruschetta: {
+                title: 'Bruschetta Italiana',
+                ingredients: [
+                    '4 fatias de pão italiano',
+                    '3 tomates maduros',
+                    '2 dentes de alho',
+                    'Manjericão fresco',
+                    'Azeite extra virgem',
+                    'Sal e pimenta a gosto'
+                ],
+                instructions: [
+                    'Toste as fatias de pão até ficarem douradas',
+                    'Esfregue o alho nas fatias ainda quentes',
+                    'Corte os tomates em cubos pequenos',
+                    'Tempere os tomates com sal, pimenta e azeite',
+                    'Coloque a mistura sobre o pão',
+                    'Finalize com manjericão fresco'
+                ]
+            },
+            salada: {
+                title: 'Salada Caprese',
+                ingredients: [
+                    '200g mozzarella de búfala',
+                    '2 tomates grandes',
+                    'Manjericão fresco',
+                    'Azeite extra virgem',
+                    'Vinagre balsâmico',
+                    'Sal marinho'
+                ],
+                instructions: [
+                    'Corte a mozzarella e os tomates em fatias',
+                    'Alterne as fatias em um prato',
+                    'Adicione folhas de manjericão entre as fatias',
+                    'Regue com azeite e vinagre balsâmico',
+                    'Tempere com sal marinho',
+                    'Sirva imediatamente'
+                ]
+            },
+            sopa: {
+                title: 'Sopa de Abóbora',
+                ingredients: [
+                    '1kg abóbora descascada',
+                    '1 cebola média',
+                    '2 dentes de alho',
+                    '1 pedaço de gengibre',
+                    '400ml leite de coco',
+                    'Caldo de legumes',
+                    'Sal e pimenta'
+                ],
+                instructions: [
+                    'Refogue a cebola e o alho',
+                    'Adicione a abóbora em cubos',
+                    'Acrescente o gengibre ralado',
+                    'Cubra com caldo de legumes',
+                    'Cozinhe até a abóbora amolecer',
+                    'Bata no liquidificador',
+                    'Adicione o leite de coco e tempere'
+                ]
+            },
+            risotto: {
+                title: 'Risotto de Cogumelos',
+                ingredients: [
+                    '300g arroz arbóreo',
+                    '300g mix de cogumelos',
+                    '1L caldo de legumes quente',
+                    '1 cebola pequena',
+                    '100ml vinho branco',
+                    'Queijo parmesão',
+                    'Manteiga e azeite'
+                ],
+                instructions: [
+                    'Refogue os cogumelos e reserve',
+                    'Doure a cebola no azeite',
+                    'Adicione o arroz e toste por 2 minutos',
+                    'Acrescente o vinho branco',
+                    'Adicione o caldo quente aos poucos',
+                    'Mexa constantemente por 18 minutos',
+                    'Finalize com cogumelos, manteiga e queijo'
+                ]
+            },
+            salmao: {
+                title: 'Salmão Grelhado',
+                ingredients: [
+                    '4 filés de salmão',
+                    'Ervas frescas (tomilho, alecrim)',
+                    '2 limões',
+                    'Azeite',
+                    'Legumes variados',
+                    'Sal e pimenta'
+                ],
+                instructions: [
+                    'Tempere o salmão com sal, pimenta e ervas',
+                    'Regue com azeite e suco de limão',
+                    'Deixe marinar por 30 minutos',
+                    'Corte os legumes em pedaços',
+                    'Grelhe o salmão por 4 minutos de cada lado',
+                    'Asse os legumes no forno',
+                    'Sirva com fatias de limão'
+                ]
+            },
+            pasta: {
+                title: 'Pasta Carbonara',
+                ingredients: [
+                    '400g espaguete',
+                    '150g bacon em cubos',
+                    '3 ovos inteiros + 2 gemas',
+                    '100g queijo parmesão ralado',
+                    '2 dentes de alho',
+                    'Pimenta preta moída',
+                    'Sal'
+                ],
+                instructions: [
+                    'Cozinhe o espaguete al dente',
+                    'Frite o bacon até ficar crocante',
+                    'Bata os ovos com o queijo parmesão',
+                    'Escorra a massa reservando água do cozimento',
+                    'Misture a massa quente com o bacon',
+                    'Retire do fogo e adicione a mistura de ovos',
+                    'Mexa rapidamente, adicione água se necessário'
+                ]
+            },
+            tiramisu: {
+                title: 'Tiramisù Clássico',
+                ingredients: [
+                    '500g mascarpone',
+                    '6 ovos',
+                    '100g açúcar',
+                    '300ml café forte frio',
+                    '3 colheres de licor de café',
+                    '2 pacotes de biscoito champagne',
+                    'Cacau em pó'
+                ],
+                instructions: [
+                    'Separe as claras das gemas',
+                    'Bata as gemas com açúcar até clarear',
+                    'Adicione o mascarpone às gemas',
+                    'Bata as claras em neve e incorpore delicadamente',
+                    'Misture café com licor',
+                    'Molhe os biscoitos e faça camadas',
+                    'Alterne creme e biscoitos',
+                    'Leve à geladeira por 4 horas',
+                    'Polvilhe cacau antes de servir'
+                ]
+            },
+            mousse: {
+                title: 'Mousse de Chocolate',
+                ingredients: [
+                    '200g chocolate meio amargo',
+                    '3 ovos',
+                    '3 colheres de açúcar',
+                    '200ml creme de leite fresco',
+                    '1 colher de essência de baunilha'
+                ],
+                instructions: [
+                    'Derreta o chocolate em banho-maria',
+                    'Separe as claras das gemas',
+                    'Bata as gemas com açúcar',
+                    'Misture o chocolate derretido às gemas',
+                    'Bata o creme de leite em chantilly',
+                    'Bata as claras em neve',
+                    'Incorpore delicadamente chantilly e claras',
+                    'Leve à geladeira por 2 horas'
+                ]
+            },
+            pavlova: {
+                title: 'Pavlova de Frutas',
+                ingredients: [
+                    '4 claras de ovo',
+                    '250g açúcar refinado',
+                    '1 colher de vinagre branco',
+                    '1 colher de amido de milho',
+                    '300ml creme de leite fresco',
+                    'Frutas vermelhas variadas',
+                    'Açúcar de confeiteiro'
+                ],
+                instructions: [
+                    'Bata as claras até formar picos',
+                    'Adicione açúcar aos poucos',
+                    'Incorpore vinagre e amido',
+                    'Forme um círculo no papel manteiga',
+                    'Asse a 150°C por 1 hora',
+                    'Deixe esfriar no forno desligado',
+                    'Bata o creme de leite com açúcar de confeiteiro',
+                    'Cubra com chantilly e frutas'
+                ]
+            },
+            coxinha: {
+                title: 'Coxinha de Frango',
+                ingredients: [
+                    '500g peito de frango',
+                    '2 xícaras de farinha de trigo',
+                    '2 xícaras de caldo de frango',
+                    '2 colheres de manteiga',
+                    '1 cebola picada',
+                    '2 dentes de alho',
+                    'Farinha de rosca',
+                    '2 ovos batidos',
+                    'Óleo para fritar'
+                ],
+                instructions: [
+                    'Cozinhe e desfie o frango',
+                    'Refogue cebola e alho, adicione o frango',
+                    'Ferva o caldo com manteiga',
+                    'Adicione a farinha mexendo até formar massa',
+                    'Deixe esfriar e modele as coxinhas',
+                    'Passe no ovo e na farinha de rosca',
+                    'Frite em óleo quente até dourar'
+                ]
+            },
+            guacamole: {
+                title: 'Guacamole Mexicano',
+                ingredients: [
+                    '3 abacates maduros',
+                    '1 tomate sem sementes',
+                    '1/2 cebola roxa',
+                    '2 dentes de alho',
+                    'Suco de 2 limões',
+                    'Coentro fresco',
+                    'Pimenta jalapeño',
+                    'Sal a gosto'
+                ],
+                instructions: [
+                    'Amasse os abacates com garfo',
+                    'Pique finamente tomate e cebola',
+                    'Misture alho amassado',
+                    'Adicione suco de limão',
+                    'Tempere com sal e pimenta',
+                    'Finalize com coentro picado',
+                    'Sirva com nachos ou tacos'
+                ]
+            },
+            hummus: {
+                title: 'Hummus Tradicional',
+                ingredients: [
+                    '400g grão-de-bico cozido',
+                    '3 colheres de tahine',
+                    '2 dentes de alho',
+                    'Suco de 1 limão',
+                    '3 colheres de azeite',
+                    '1/2 xícara de água gelada',
+                    'Cominho em pó',
+                    'Sal e páprica'
+                ],
+                instructions: [
+                    'Bata o grão-de-bico no processador',
+                    'Adicione tahine e alho',
+                    'Acrescente suco de limão',
+                    'Adicione água aos poucos',
+                    'Tempere com sal e cominho',
+                    'Regue com azeite',
+                    'Polvilhe páprica antes de servir'
+                ]
+            },
+            frango: {
+                title: 'Frango à Parmegiana',
+                ingredients: [
+                    '4 filés de frango',
+                    '2 ovos batidos',
+                    'Farinha de rosca',
+                    '300ml molho de tomate',
+                    '200g queijo mussarela',
+                    '100g queijo parmesão',
+                    'Farinha de trigo',
+                    'Óleo para fritar',
+                    'Sal e pimenta'
+                ],
+                instructions: [
+                    'Tempere os filés com sal e pimenta',
+                    'Passe na farinha, ovo e farinha de rosca',
+                    'Frite até dourar dos dois lados',
+                    'Coloque em refratário com molho',
+                    'Cubra com queijos',
+                    'Leve ao forno até derreter',
+                    'Sirva com arroz e batata frita'
+                ]
+            },
+            paella: {
+                title: 'Paella Valenciana',
+                ingredients: [
+                    '400g arroz bomba',
+                    '500g frango em pedaços',
+                    '300g camarões',
+                    '200g lulas',
+                    '1L caldo de peixe',
+                    'Açafrão',
+                    'Pimentão vermelho',
+                    'Vagem',
+                    'Azeite e alho'
+                ],
+                instructions: [
+                    'Doure o frango na paellera',
+                    'Adicione os frutos do mar',
+                    'Refogue os legumes',
+                    'Adicione o arroz e misture',
+                    'Acrescente caldo quente com açafrão',
+                    'Cozinhe sem mexer por 20 minutos',
+                    'Deixe descansar antes de servir'
+                ]
+            },
+            lasanha: {
+                title: 'Lasanha Bolonhesa',
+                ingredients: [
+                    '500g massa para lasanha',
+                    '500g carne moída',
+                    '500ml molho de tomate',
+                    '500ml molho branco',
+                    '300g queijo mussarela',
+                    '100g queijo parmesão',
+                    '1 cebola',
+                    '2 dentes de alho',
+                    'Manjericão'
+                ],
+                instructions: [
+                    'Prepare o molho bolonhesa',
+                    'Cozinhe a massa al dente',
+                    'Faça o molho branco',
+                    'Monte camadas: massa, bolonhesa, molho branco',
+                    'Repita as camadas',
+                    'Cubra com queijos',
+                    'Asse por 40 minutos a 180°C'
+                ]
+            },
+            curry: {
+                title: 'Curry de Camarão',
+                ingredients: [
+                    '500g camarões limpos',
+                    '400ml leite de coco',
+                    '2 colheres de pasta de curry',
+                    '1 cebola',
+                    '2 dentes de alho',
+                    '1 pedaço de gengibre',
+                    'Coentro fresco',
+                    'Pimenta e sal',
+                    'Arroz basmati'
+                ],
+                instructions: [
+                    'Refogue cebola, alho e gengibre',
+                    'Adicione a pasta de curry',
+                    'Acrescente o leite de coco',
+                    'Tempere os camarões',
+                    'Adicione ao molho e cozinhe',
+                    'Finalize com coentro',
+                    'Sirva com arroz basmati'
+                ]
+            },
+            brigadeiro: {
+                title: 'Brigadeiro Gourmet',
+                ingredients: [
+                    '1 lata de leite condensado',
+                    '3 colheres de chocolate em pó',
+                    '1 colher de manteiga',
+                    'Chocolate granulado',
+                    'Forminhas de papel',
+                    'Pitada de sal'
+                ],
+                instructions: [
+                    'Misture todos os ingredientes na panela',
+                    'Cozinhe em fogo baixo mexendo sempre',
+                    'Cozinhe até desgrudar do fundo',
+                    'Deixe esfriar completamente',
+                    'Faça bolinhas com as mãos',
+                    'Passe no granulado',
+                    'Coloque nas forminhas'
+                ]
+            },
+            cheesecake: {
+                title: 'Cheesecake de Frutas Vermelhas',
+                ingredients: [
+                    '200g biscoito maisena',
+                    '100g manteiga derretida',
+                    '600g cream cheese',
+                    '200g açúcar',
+                    '3 ovos',
+                    '200ml creme de leite',
+                    '300g frutas vermelhas',
+                    '100g açúcar para calda'
+                ],
+                instructions: [
+                    'Misture biscoito triturado com manteiga',
+                    'Forre o fundo da forma',
+                    'Bata cream cheese com açúcar',
+                    'Adicione ovos um a um',
+                    'Incorpore o creme de leite',
+                    'Asse em banho-maria por 50 minutos',
+                    'Prepare calda com frutas e açúcar',
+                    'Cubra o cheesecake frio'
+                ]
+            },
+            pudim: {
+                title: 'Pudim de Leite Condensado',
+                ingredients: [
+                    '1 lata de leite condensado',
+                    '1 lata de leite (mesma medida)',
+                    '3 ovos',
+                    '1 xícara de açúcar para caramelo',
+                    '1/2 xícara de água'
+                ],
+                instructions: [
+                    'Faça o caramelo com açúcar e água',
+                    'Cubra o fundo da forma',
+                    'Bata todos os ingredientes no liquidificador',
+                    'Despeje sobre o caramelo',
+                    'Cozinhe em banho-maria por 1 hora',
+                    'Deixe esfriar completamente',
+                    'Desenforme gelado'
+                ]
+            },
+            brownie: {
+                title: 'Brownie de Chocolate',
+                ingredients: [
+                    '200g chocolate meio amargo',
+                    '150g manteiga',
+                    '200g açúcar',
+                    '3 ovos',
+                    '100g farinha de trigo',
+                    '100g nozes picadas',
+                    'Pitada de sal'
+                ],
+                instructions: [
+                    'Derreta chocolate com manteiga',
+                    'Bata ovos com açúcar',
+                    'Misture chocolate derretido',
+                    'Adicione farinha peneirada',
+                    'Incorpore as nozes',
+                    'Asse por 25 minutos a 180°C',
+                    'Não asse demais para ficar úmido'
+                ]
+            },
+            pannacotta: {
+                title: 'Panna Cotta de Baunilha',
+                ingredients: [
+                    '500ml creme de leite fresco',
+                    '100g açúcar',
+                    '1 envelope de gelatina',
+                    '3 colheres de água',
+                    '1 fava de baunilha',
+                    'Calda de frutas vermelhas'
+                ],
+                instructions: [
+                    'Hidrate a gelatina na água',
+                    'Aqueça o creme com açúcar e baunilha',
+                    'Dissolva a gelatina no creme quente',
+                    'Coe a mistura',
+                    'Distribua nas formas',
+                    'Leve à geladeira por 3 horas',
+                    'Desenforme e sirva com calda'
+                ]
+            },
+            tartare: {
+                title: 'Tartare de Salmão',
+                ingredients: [
+                    '400g salmão fresco sem pele',
+                    '2 colheres de alcaparras',
+                    '1 colher de mostarda Dijon',
+                    '1 chalota picada',
+                    'Suco de 1 limão',
+                    'Azeite extra virgem',
+                    'Cebolinha picada',
+                    'Sal e pimenta'
+                ],
+                instructions: [
+                    'Corte o salmão em cubos pequenos',
+                    'Misture com chalota e alcaparras',
+                    'Tempere com mostarda e limão',
+                    'Adicione azeite aos poucos',
+                    'Tempere com sal e pimenta',
+                    'Finalize com cebolinha',
+                    'Sirva imediatamente gelado'
+                ]
+            },
+            carpaccio: {
+                title: 'Carpaccio de Carne',
+                ingredients: [
+                    '300g filé mignon',
+                    'Rúcula fresca',
+                    '100g parmesão em lascas',
+                    'Azeite extra virgem',
+                    'Suco de limão',
+                    'Alcaparras',
+                    'Sal marinho',
+                    'Pimenta preta'
+                ],
+                instructions: [
+                    'Congele a carne por 2 horas',
+                    'Corte em fatias bem finas',
+                    'Disponha no prato',
+                    'Regue com azeite e limão',
+                    'Tempere com sal e pimenta',
+                    'Cubra com rúcula e parmesão',
+                    'Finalize com alcaparras'
+                ]
+            },
+            antipasto: {
+                title: 'Tábua de Antipasto',
+                ingredients: [
+                    'Queijos variados (brie, gorgonzola, parmesão)',
+                    'Presunto de Parma',
+                    'Salame italiano',
+                    'Azeitonas verdes e pretas',
+                    'Tomates secos',
+                    'Pães artesanais',
+                    'Geleias especiais',
+                    'Nozes e castanhas'
+                ],
+                instructions: [
+                    'Retire os queijos da geladeira 30min antes',
+                    'Corte os queijos em fatias',
+                    'Disponha carnes em leque',
+                    'Organize em tábua de madeira',
+                    'Adicione azeitonas e tomates secos',
+                    'Coloque pães em cestas',
+                    'Sirva com geleias e nozes'
+                ]
+            },
+            gazpacho: {
+                title: 'Gazpacho Andaluz',
+                ingredients: [
+                    '1kg tomates maduros',
+                    '1 pepino',
+                    '1 pimentão vermelho',
+                    '1 cebola pequena',
+                    '2 dentes de alho',
+                    '100ml azeite',
+                    '2 colheres de vinagre',
+                    'Sal e pimenta'
+                ],
+                instructions: [
+                    'Descasque e pique os tomates',
+                    'Corte pepino e pimentão',
+                    'Bata tudo no liquidificador',
+                    'Adicione azeite aos poucos',
+                    'Tempere com vinagre, sal e pimenta',
+                    'Passe por peneira fina',
+                    'Leve à geladeira por 4 horas',
+                    'Sirva bem gelado'
+                ]
+            },
+            tempura: {
+                title: 'Tempurá de Camarão',
+                ingredients: [
+                    '500g camarões grandes',
+                    '1 xícara de farinha de trigo',
+                    '1 ovo gelado',
+                    '200ml água gelada',
+                    'Óleo para fritar',
+                    'Molho de soja',
+                    'Gengibre ralado',
+                    'Sal'
+                ],
+                instructions: [
+                    'Limpe os camarões deixando o rabo',
+                    'Misture farinha, ovo e água gelada',
+                    'Não bata demais a massa',
+                    'Aqueça óleo a 180°C',
+                    'Passe camarões na massa',
+                    'Frite rapidamente até dourar',
+                    'Escorra em papel absorvente',
+                    'Sirva com molho de soja e gengibre'
+                ]
+            },
+            wellington: {
+                title: 'Beef Wellington',
+                ingredients: [
+                    '1kg filé mignon',
+                    '500g massa folhada',
+                    '300g cogumelos variados',
+                    '200g patê de fígado',
+                    'Presunto de Parma',
+                    '2 gemas de ovo',
+                    'Mostarda Dijon',
+                    'Tomilho fresco'
+                ],
+                instructions: [
+                    'Sele o filé em fogo alto',
+                    'Pincele com mostarda e deixe esfriar',
+                    'Refogue os cogumelos até secar',
+                    'Forre a massa com presunto',
+                    'Espalhe patê e cogumelos',
+                    'Coloque o filé e enrole',
+                    'Pincele com gema',
+                    'Asse a 200°C por 25-30 minutos'
+                ]
+            },
+            ratatouille: {
+                title: 'Ratatouille Provençal',
+                ingredients: [
+                    '2 berinjelas',
+                    '2 abobrinhas',
+                    '3 tomates',
+                    '1 pimentão vermelho',
+                    '1 cebola',
+                    '4 dentes de alho',
+                    'Ervas de Provence',
+                    'Azeite'
+                ],
+                instructions: [
+                    'Corte todos os vegetais em cubos',
+                    'Refogue a cebola e alho',
+                    'Adicione berinjela e pimentão',
+                    'Acrescente abobrinha',
+                    'Por último, adicione tomates',
+                    'Tempere com ervas',
+                    'Cozinhe em fogo baixo por 45min',
+                    'Sirva quente ou frio'
+                ]
+            },
+            coqauvin: {
+                title: 'Coq au Vin',
+                ingredients: [
+                    '1 frango inteiro cortado',
+                    '750ml vinho tinto',
+                    '200g bacon em cubos',
+                    '300g cogumelos',
+                    '12 cebolinhas',
+                    '3 dentes de alho',
+                    'Bouquet garni',
+                    'Manteiga e farinha'
+                ],
+                instructions: [
+                    'Marine o frango no vinho por 2 horas',
+                    'Frite o bacon até crocante',
+                    'Doure o frango na gordura do bacon',
+                    'Adicione cebolinhas e cogumelos',
+                    'Acrescente o vinho da marinada',
+                    'Adicione bouquet garni',
+                    'Cozinhe por 1h30 em fogo baixo',
+                    'Engrosse com manteiga e farinha'
+                ]
+            },
+            ossobuco: {
+                title: 'Osso Buco Milanês',
+                ingredients: [
+                    '1,5kg jarrete bovino cortado',
+                    '2 cenouras',
+                    '2 talos de aipo',
+                    '1 cebola',
+                    '400ml vinho branco',
+                    '400g tomates pelados',
+                    'Caldo de carne',
+                    'Gremolata (limão, alho, salsa)'
+                ],
+                instructions: [
+                    'Enfarinhe e doure os ossos',
+                    'Refogue os vegetais',
+                    'Adicione vinho e deixe reduzir',
+                    'Acrescente tomates e caldo',
+                    'Cozinhe tampado por 2h30',
+                    'Vire os ossos na metade do tempo',
+                    'Prepare gremolata',
+                    'Sirva polvilhado com gremolata'
+                ]
+            },
+            bouillabaisse: {
+                title: 'Bouillabaisse',
+                ingredients: [
+                    '1kg peixes variados',
+                    '500g frutos do mar',
+                    '2 tomates',
+                    '1 cebola',
+                    'Erva-doce',
+                    'Açafrão',
+                    'Azeite',
+                    'Rouille (molho picante)'
+                ],
+                instructions: [
+                    'Corte os peixes em postas',
+                    'Refogue cebola e tomate',
+                    'Adicione erva-doce e açafrão',
+                    'Cubra com água fervente',
+                    'Cozinhe peixes firmes primeiro',
+                    'Adicione peixes delicados por último',
+                    'Acrescente frutos do mar',
+                    'Sirva com rouille e torradas'
+                ]
+            },
+            moqueca: {
+                title: 'Moqueca Baiana',
+                ingredients: [
+                    '1kg peixe em postas',
+                    '400ml leite de coco',
+                    '3 colheres de dendê',
+                    '2 pimentões',
+                    '2 tomates',
+                    '1 cebola',
+                    'Coentro',
+                    'Pimenta malagueta'
+                ],
+                instructions: [
+                    'Tempere o peixe com sal e limão',
+                    'Refogue cebola, tomate e pimentão',
+                    'Adicione o leite de coco',
+                    'Acrescente o dendê',
+                    'Coloque o peixe temperado',
+                    'Cozinhe por 15 minutos',
+                    'Finalize com coentro',
+                    'Sirva na panela de barro'
+                ]
+            },
+            feijoada: {
+                title: 'Feijoada Completa',
+                ingredients: [
+                    '500g feijão preto',
+                    '300g carne seca',
+                    '200g linguiça calabresa',
+                    '200g costela de porco',
+                    '150g bacon',
+                    '1 pé de porco',
+                    'Cebola, alho, louro',
+                    'Laranja para acompanhar'
+                ],
+                instructions: [
+                    'Deixe o feijão de molho overnight',
+                    'Dessalgue as carnes salgadas',
+                    'Cozinhe o feijão até amolecer',
+                    'Em panela separada, doure as carnes',
+                    'Refogue cebola e alho',
+                    'Junte feijão e carnes',
+                    'Cozinhe junto por 1 hora',
+                    'Sirva com acompanhamentos tradicionais'
+                ]
+            },
+            padhaithai: {
+                title: 'Pad Thai',
+                ingredients: [
+                    '200g macarrão de arroz',
+                    '300g camarões',
+                    '2 ovos',
+                    'Brotos de feijão',
+                    'Cebolinha',
+                    'Amendoim torrado',
+                    'Molho de peixe',
+                    'Açúcar de palma'
+                ],
+                instructions: [
+                    'Deixe o macarrão de molho',
+                    'Refogue camarões e reserve',
+                    'Scramble os ovos na wok',
+                    'Adicione macarrão escorrido',
+                    'Tempere com molho de peixe',
+                    'Adicione açúcar de palma',
+                    'Volte camarões à panela',
+                    'Finalize com amendoim e brotos'
+                ]
+            },
+            tagine: {
+                title: 'Tagine Marroquino',
+                ingredients: [
+                    '1kg cordeiro em cubos',
+                    '200g damascos secos',
+                    '2 cebolas',
+                    'Canela, gengibre, açafrão',
+                    'Amêndoas tostadas',
+                    'Coentro fresco',
+                    'Caldo de carne',
+                    'Mel'
+                ],
+                instructions: [
+                    'Doure a carne em cubos',
+                    'Refogue cebolas até caramelizar',
+                    'Adicione especiarias',
+                    'Acrescente caldo quente',
+                    'Cozinhe tampado por 1h30',
+                    'Adicione damascos',
+                    'Cozinhe mais 30 minutos',
+                    'Finalize com amêndoas e coentro'
+                ]
+            },
+            cremeBrulee: {
+                title: 'Crème Brûlée',
+                ingredients: [
+                    '500ml creme de leite',
+                    '6 gemas',
+                    '100g açúcar',
+                    '1 fava de baunilha',
+                    'Açúcar cristal para queimar'
+                ],
+                instructions: [
+                    'Aqueça o creme com baunilha',
+                    'Bata gemas com açúcar',
+                    'Misture creme quente às gemas',
+                    'Coe a mistura',
+                    'Distribua em ramequins',
+                    'Asse em banho-maria por 40min',
+                    'Deixe esfriar completamente',
+                    'Polvilhe açúcar e queime com maçarico'
+                ]
+            },
+            macarons: {
+                title: 'Macarons Franceses',
+                ingredients: [
+                    '100g farinha de amêndoas',
+                    '200g açúcar de confeiteiro',
+                    '75g claras de ovo',
+                    '25g açúcar refinado',
+                    'Corante alimentício',
+                    'Recheio de ganache'
+                ],
+                instructions: [
+                    'Peneire farinha de amêndoas e açúcar',
+                    'Bata claras com açúcar refinado',
+                    'Adicione corante às claras',
+                    'Incorpore mistura seca delicadamente',
+                    'Faça círculos em tapete de silicone',
+                    'Deixe formar película por 30min',
+                    'Asse a 150°C por 15 minutos',
+                    'Recheie com ganache após esfriar'
+                ]
+            },
+            banoffee: {
+                title: 'Banoffee Pie',
+                ingredients: [
+                    '200g biscoito digestivo',
+                    '100g manteiga',
+                    '400g doce de leite',
+                    '3 bananas',
+                    '300ml creme de leite',
+                    '2 colheres de açúcar',
+                    'Chocolate ralado'
+                ],
+                instructions: [
+                    'Triture biscoitos e misture com manteiga',
+                    'Forre fundo da forma',
+                    'Espalhe doce de leite',
+                    'Corte bananas em rodelas',
+                    'Disponha sobre o doce de leite',
+                    'Bata creme com açúcar',
+                    'Cubra com chantilly',
+                    'Finalize com chocolate ralado'
+                ]
+            },
+            profiteroles: {
+                title: 'Profiteroles',
+                ingredients: [
+                    '250ml água',
+                    '125g manteiga',
+                    '150g farinha',
+                    '4 ovos',
+                    'Creme de confeiteiro',
+                    '200g chocolate',
+                    '200ml creme de leite'
+                ],
+                instructions: [
+                    'Ferva água com manteiga',
+                    'Adicione farinha de uma vez',
+                    'Mexa até formar massa lisa',
+                    'Incorpore ovos um a um',
+                    'Faça bolinhas com saco de confeitar',
+                    'Asse a 200°C por 25 minutos',
+                    'Recheie com creme',
+                    'Cubra com ganache de chocolate'
+                ]
+            },
+            millefeuille: {
+                title: 'Millefeuille',
+                ingredients: [
+                    '500g massa folhada',
+                    '500ml leite',
+                    '6 gemas',
+                    '100g açúcar',
+                    '60g amido de milho',
+                    '1 fava de baunilha',
+                    'Açúcar de confeiteiro'
+                ],
+                instructions: [
+                    'Abra a massa em retângulos',
+                    'Asse até dourar e ficar crocante',
+                    'Prepare creme de confeiteiro',
+                    'Deixe esfriar completamente',
+                    'Monte camadas: massa, creme, massa',
+                    'Repita até 3 camadas',
+                    'Cubra com açúcar de confeiteiro',
+                    'Corte com faca serrilhada'
+                ]
+            },
+            beijinho: {
+                title: 'Beijinho de Coco',
+                ingredients: [
+                    '1 lata de leite condensado',
+                    '1 colher de manteiga',
+                    '100g coco ralado',
+                    'Coco ralado para enrolar',
+                    'Cravo da índia'
+                ],
+                instructions: [
+                    'Misture leite condensado, manteiga e coco',
+                    'Cozinhe mexendo sempre',
+                    'Cozinhe até desgrudar da panela',
+                    'Deixe esfriar completamente',
+                    'Faça bolinhas com as mãos',
+                    'Passe no coco ralado',
+                    'Decore com cravo',
+                    'Coloque em forminhas'
+                ]
+            },
+            quindim: {
+                title: 'Quindim',
+                ingredients: [
+                    '12 gemas',
+                    '200g açúcar',
+                    '200g coco ralado',
+                    '200ml leite de coco',
+                    'Manteiga para untar',
+                    'Açúcar para caramelizar'
+                ],
+                instructions: [
+                    'Caramelize forminhas com açúcar',
+                    'Bata gemas levemente',
+                    'Adicione açúcar aos poucos',
+                    'Incorpore coco e leite de coco',
+                    'Distribua nas forminhas',
+                    'Asse em banho-maria por 40min',
+                    'Deixe esfriar antes de desenformar',
+                    'Sirva gelado'
+                ]
+            },
+            baklava: {
+                title: 'Baklava',
+                ingredients: [
+                    '500g massa filo',
+                    '300g nozes picadas',
+                    '200g manteiga derretida',
+                    '200g açúcar',
+                    '200ml água',
+                    '100ml mel',
+                    'Canela em pó'
+                ],
+                instructions: [
+                    'Pincele massa filo com manteiga',
+                    'Faça camadas intercalando com nozes',
+                    'Corte em losangos antes de assar',
+                    'Asse a 180°C por 30 minutos',
+                    'Prepare calda com açúcar, água e mel',
+                    'Despeje calda quente sobre baklava fria',
+                    'Deixe absorver por 4 horas',
+                    'Sirva em temperatura ambiente'
+                ]
+            },
+            mochi: {
+                title: 'Mochi de Sorvete',
+                ingredients: [
+                    '200g farinha de arroz glutinoso',
+                    '250ml água',
+                    '50g açúcar',
+                    'Amido de milho',
+                    'Sorvete de baunilha',
+                    'Corante alimentício'
+                ],
+                instructions: [
+                    'Misture farinha, água e açúcar',
+                    'Cozinhe no microondas por 2 minutos',
+                    'Mexa e cozinhe mais 1 minuto',
+                    'Deixe esfriar um pouco',
+                    'Polvilhe amido na superfície',
+                    'Abra círculos da massa',
+                    'Coloque bola de sorvete no centro',
+                    'Feche e congele por 2 horas'
+                ]
+            },
+            cannoli: {
+                title: 'Cannoli Siciliano',
+                ingredients: [
+                    '300g farinha',
+                    '2 ovos',
+                    '30ml vinho branco',
+                    '500g ricota',
+                    '200g açúcar de confeiteiro',
+                    'Chocolate picado',
+                    'Pistaches',
+                    'Óleo para fritar'
+                ],
+                instructions: [
+                    'Faça massa com farinha, ovos e vinho',
+                    'Abra bem fino e corte círculos',
+                    'Enrole em tubos de metal',
+                    'Frite até dourar',
+                    'Misture ricota com açúcar',
+                    'Adicione chocolate e pistaches',
+                    'Recheie as casquinhas na hora',
+                    'Polvilhe açúcar de confeiteiro'
+                ]
+            },
+            gelato: {
+                title: 'Gelato Artesanal',
+                ingredients: [
+                    '500ml leite integral',
+                    '200ml creme de leite',
+                    '150g açúcar',
+                    '6 gemas',
+                    '100g pistaches',
+                    '1 colher de extrato de baunilha'
+                ],
+                instructions: [
+                    'Aqueça leite com creme',
+                    'Bata gemas com açúcar',
+                    'Tempere gemas com leite quente',
+                    'Cozinhe até engrossar levemente',
+                    'Adicione pistaches triturados',
+                    'Deixe esfriar completamente',
+                    'Bata na sorveteira por 25 minutos',
+                    'Congele por 2 horas antes de servir'
+                ]
+            }
+        };
+
+        function openRecipe(recipeId) {
+            const recipe = recipes[recipeId];
+            const modal = document.getElementById('recipeModal');
+            const content = document.getElementById('modalContent');
+
+            content.innerHTML = `
+                <h3>${recipe.title}</h3>
+                <div class="ingredients">
+                    <h4>Ingredientes:</h4>
+                    <ul>
+                        ${recipe.ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
+                    </ul>
+                </div>
+                <div class="instructions">
+                    <h4>Modo de Preparo:</h4>
+                    <ol>
+                        ${recipe.instructions.map(instruction => `<li>${instruction}</li>`).join('')}
+                    </ol>
+                </div>
+            `;
+
+            modal.style.display = 'block';
+        }
+
+        function closeRecipe() {
+            document.getElementById('recipeModal').style.display = 'none';
+        }
+
+        // Fechar modal clicando fora
+        window.onclick = function (event) {
+            const modal = document.getElementById('recipeModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Navegação suave
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+    <script>(function () { function c() { var b = a.contentDocument || a.contentWindow.document; if (b) { var d = b.createElement('script'); d.innerHTML = "window.__CF$cv$params={r:'98a58a4f61e83652',t:'MTc1OTc1NzcwOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);"; b.getElementsByTagName('head')[0].appendChild(d) } } if (document.body) { var a = document.createElement('iframe'); a.height = 1; a.width = 1; a.style.position = 'absolute'; a.style.top = 0; a.style.left = 0; a.style.border = 'none'; a.style.visibility = 'hidden'; document.body.appendChild(a); if ('loading' !== document.readyState) c(); else if (window.addEventListener) document.addEventListener('DOMContentLoaded', c); else { var e = document.onreadystatechange || function () { }; document.onreadystatechange = function (b) { e(b); 'loading' !== document.readyState && (document.onreadystatechange = e, c()) } } } })();</script>
+</body>
+
+</html>
